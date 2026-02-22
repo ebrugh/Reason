@@ -147,8 +147,9 @@ glimpse(prop_calc)
 #find max value and create new table
 #need state, county, and water proportion
 ```{r}
-task1_2 <- d.counties %>%
+task1_2 <- prop_calc %>%
   group_by(STATEFP10) %>%
+  slice_max(water_proportion, n = 1) %>%
   select(STATEFP10, NAME10, water_proportion)
 ```
 
