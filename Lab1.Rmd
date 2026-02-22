@@ -122,11 +122,35 @@ del.counties %>% st_area()
 
 
 
-####Task 1 
-task1_1 <- d.counties %>% {
-  as_tibble(d.counties) %>% dplyr::select(-geometry) %>%
-    group_by(STATEFP10) %>%
-    summarise(stateWaterArea = sum(AWATER10)) 
-}
+####Task 1
+##task1_1
+```{r}
+task1_1 <- d.counties %>% 
+  as_tibble() %>% dplyr::select(-geometry) %>%
+  group_by(STATEFP10) %>%
+  mutate(totalStateLandArea = sum(ALAND10 + AWATER10),
+  (land_percent_total_area = ALAND10 / totalStateLandArea) * 100) 
+```
+
+##task1-2
+#calculated the water proportion group function not needed
+```{r}
+d.counties %>%
+  as_tibble() %>% dplyr::select(-geometry) %>%
+  mutate(water_proportion = AWATER10 / (ALAND10 + AWATER10))
+```
+#find max value and create new table
+#need state, county, and water proportion
+```{r}
+task1_2 <- d.counties %>%
+  group_by(STATEFP10) %>%
+  dplyr::select(STATEFP10, NAME10, water_proportion)
+```
+
+
+
+
+
+
 
 
