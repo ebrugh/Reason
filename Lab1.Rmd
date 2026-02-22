@@ -1,77 +1,132 @@
+---
+title: "Lab1"
+author: "Eleanore Brugh"
+date: "2026-02-22"
+output: html_document
+---
+
+###lab exercises
+```{r}
 library(tidyverse)
 library(ggplot2)
 library(sf)
+library(dplyr)
+```
 
+```{r}
 p.counties <- "C:/R/Data/CBW/County_Boundaries.shp"
 p.stations <- "C:/R/Data/CBW/Non-Tidal_Water_Quality_Monitoring_Stations_in_the_Chesapeake_Bay.shp"
+```
 
+```{r}
 d.counties <- sf::read_sf(p.counties)
 d.stations <- sf::read_sf(p.stations)
+```
 
-library(dplyr)
-
+```{r}
 glimpse(d.counties)
-
 glimpse(d.stations)
+```
 
-d.stations %>% sf::st_is_valid() 
+```{r}
+d.stations %>% sf::st_is_valid()
+```
 
-d.counties %>% dplyr::select(GEOID10, ALAND10) %>% head() 
+```{r}
+d.counties %>% sf::st_is_valid()
+```
 
+```{r}
+d.counties <- d.counties %>% sf::st_make_valid()
+```
+
+#dplyr
+```{r}
+d.counties %>% dplyr::select(GEOID10, ALAND10) %>% head()
+```
+
+```{r}
 d.counties %>% dplyr::select(-NAME10) %>% head() 
+```
 
+```{r}
 d.counties %>% dplyr::select(GEOID10:CLASSFP10) %>% head() 
+```
 
+```{r}
 d.counties %>% dplyr::select(-(GEOID10:CLASSFP10)) %>% head()
+```
 
+```{r}
 d.counties %>% dplyr::select(starts_with("C"))
+```
 
+#grouping data
+```{r}
 d.counties %>% group_by(STATEFP10) %>% mutate(stateLandArea = sum(ALAND10))
+```
 
+#without geometry
+```{r}
 d.counties %>% {
   as_tibble(d.counties) %>% dplyr::select(-geometry) %>%
     group_by(STATEFP10) %>%
     summarise(stateLandArea = sum(ALAND10))}
+```
 
+#plot (+)
+```{r}
 d.counties %>% {
   ggplot(., aes(x = as.factor(STATEFP10), y = ALAND10)) +
     geom_boxplot(aes(fill = STATEFP10))}
+```
 
+```{r}
 d.counties %>% {
   ggplot(., aes(x = ALAND10)) +
     geom_histogram(aes(fill = STATEFP10)) +
     labs(title = "not useful")}
+```
 
-d.counties %>% sf::st_crs()
-
-d.stations %>% sf::st_crs()
-
+##spatial operations
+#same CRS
+```{r}
 d.counties %>% sf::st_crs() == d.stations %>% sf::st_crs()
+```
 
+#trimming data
+```{r}
 del.counties <- d.counties %>% dplyr::filter(STATEFP10 == 10)
+```
 
+#spatial intersection
+```{r}
 del.stations <- sf::st_intersection(d.stations, del.counties)
+```
 
+```{r}
 glimpse(del.stations)
-
+```
+```{r}
 plot(del.stations)
+```
+```{r}
 
+```
+```{r}
 del.counties %>% st_area()
-
-
-
-
-
-#Task 1 
-d.counties %>% {
-  group_by(STATEFP10) %>%
-    mutate(stateWaterArea = sum(WATER10))}
+```
 
 
 
 
 
 
-
+####Task 1 
+task1_1 <- d.counties %>% {
+  as_tibble(d.counties) %>% dplyr::select(-geometry) %>%
+    group_by(STATEFP10) %>%
+    summarise(stateWaterArea = sum(AWATER10)) 
+}
 
 
