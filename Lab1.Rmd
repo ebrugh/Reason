@@ -168,6 +168,30 @@ task1_3 <- d.counties %>%
 ```{r}
 glimpse(task1_3)
 ```
+##task1-4
+#calculate characters
+```{r}
+name_length <- d.stations %>%
+  as_tibble() %>% dplyr::select(-geometry) %>%
+  mutate(tot_char = nchar(STATION_NA))
+```
+
+```{r}
+glimpse(name_length)
+```
+
+#find shortest name
+```{r}
+task1_4 <- name_length %>%
+  slice_min(name_length, n = 1) %>%
+  select(STATION_NA, tot_char)
+```
+#answer for 1-4
+```{r}
+glimpse(task1_4)
+```
+
+
 
 
 
