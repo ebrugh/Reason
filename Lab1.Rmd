@@ -153,6 +153,21 @@ task1_2 <- prop_calc %>%
   select(STATEFP10, NAME10, water_proportion)
 ```
 
+```{r}
+glimpse(task1_2)
+```
+
+##task1-3
+#no group just calculation
+```{r}
+task1_3 <- d.counties %>%
+  as_tibble() %>% dplyr::select(-geometry) %>%
+  count(STATEFP10, name = "count_perstate")
+```
+
+```{r}
+glimpse(task1_3)
+```
 
 
 
