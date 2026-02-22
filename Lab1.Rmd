@@ -135,16 +135,21 @@ task1_1 <- d.counties %>%
 ##task1-2
 #calculated the water proportion group function not needed
 ```{r}
-d.counties %>%
+prop_calc <- d.counties %>%
   as_tibble() %>% dplyr::select(-geometry) %>%
   mutate(water_proportion = AWATER10 / (ALAND10 + AWATER10))
 ```
+
+```{r}
+glimpse(prop_calc)
+```
+
 #find max value and create new table
 #need state, county, and water proportion
 ```{r}
 task1_2 <- d.counties %>%
   group_by(STATEFP10) %>%
-  dplyr::select(STATEFP10, NAME10, water_proportion)
+  select(STATEFP10, NAME10, water_proportion)
 ```
 
 
