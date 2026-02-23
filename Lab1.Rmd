@@ -209,12 +209,16 @@ ggplot(d.stations) +
 ```
 
 ####Task2-3
-#####histogram with color
+#####join - not intersection
 ```{r}
-ggplot(d.stations) +
-  aes(x = Drainage_A) +
-  geom_histogram(bins = 15) +
-  labs(title = "Drainage Area for All Monitoring Stations", x = "Drainage Area (Drainage_A)", y = "Number of Stations")
+join_stations_state <- st_join(d.stations, d.counties["STATEFP10"])
+```
+#####histogram
+```{r}
+ggplot(join_stations_state) +
+  aes(x = Drainage_A, fill = STATEFP10) +
+  geom_histogram(bins = 30) +
+  labs(title = "Drainage Area for All Monitoring Stations", x = "Drainage Area (Drainage_A)", y = "Number of Stations", fill = "STATEFP10")
 ```
 
 
