@@ -221,6 +221,18 @@ ggplot(join_stations_state) +
   labs(title = "Drainage Area for All Monitoring Stations", x = "Drainage Area (Drainage_A)", y = "Number of Stations", fill = "STATEFP10")
 ```
 
+#Task 3
+####Task3-1
+```{r}
+f.efunc <- function(x){
+  if (!is.numeric(x)) stop("Error") 
+    mean = mean(x)
+    median = median(x)
+    maximum = maximum(x)
+    minimum = minimum(x)
+    sort(x)}
+```
+
 
 
 
