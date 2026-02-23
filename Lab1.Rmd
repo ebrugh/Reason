@@ -232,7 +232,19 @@ f.efunc <- function(x){
     min = min(x)
     sort(x)}
 ```
-
+#####vectors
+```{r}
+f.efunc(c(1,0,-1))
+```
+```{r}
+f.efunc(c(10,1000,100))
+```
+```{r}
+f.efunc(c(.1, .001, 1e8))
+```
+```{r}
+f.efunc(c("a", "b", "c"))
+```
 
 
 
