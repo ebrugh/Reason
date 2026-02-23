@@ -247,7 +247,19 @@ f.efunc(c("a", "b", "c"))
 ```
 
 
+#TASK 4
+####Task4-1
+####Task4-2
+####Task4-3
 
+
+
+#QUESTIONS
+####Q1
+####Q2
+#######I found Task 1 the most challenging. I think that was because I have never done any programming before and I didn't know where to start or how/if I needed to change my workflow. So, that was extremely daunting. I slowly adapted to it and the rest were a lot easier compared to that first task. 
+####Q3
+#######I would like to do more functions. I think they are fun.
 
 
 
