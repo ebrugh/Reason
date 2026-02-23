@@ -228,8 +228,8 @@ f.efunc <- function(x){
   if (!is.numeric(x)) stop("Error") 
     mean = mean(x)
     median = median(x)
-    maximum = maximum(x)
-    minimum = minimum(x)
+    max = max(x)
+    min = min(x)
     sort(x)}
 ```
 
