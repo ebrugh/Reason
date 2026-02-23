@@ -122,8 +122,8 @@ del.counties %>% st_area()
 
 
 
-####TASK 1
-##task1-1
+#TASK 1
+####Task1-1
 ```{r}
 task1_1 <- d.counties %>% 
   as_tibble() %>% dplyr::select(-geometry) %>%
@@ -132,8 +132,8 @@ task1_1 <- d.counties %>%
   (land_percent_total_area = ALAND10 / totalStateLandArea) * 100) 
 ```
 
-##task1-2
-#calculated the water proportion group function not needed
+####Task1-2
+######calculated the water proportion group function not needed
 ```{r}
 prop_calc <- d.counties %>%
   as_tibble() %>% dplyr::select(-geometry) %>%
@@ -144,8 +144,8 @@ prop_calc <- d.counties %>%
 glimpse(prop_calc)
 ```
 
-#find max value and create new table
-#need state, county, and water proportion
+#####find max value and create new table
+#####need state, county, and water proportion
 ```{r}
 task1_2 <- prop_calc %>%
   group_by(STATEFP10) %>%
@@ -157,8 +157,8 @@ task1_2 <- prop_calc %>%
 glimpse(task1_2)
 ```
 
-##task1-3
-#no group just calculation
+####Task1-3
+#####no group just calculation
 ```{r}
 task1_3 <- d.counties %>%
   as_tibble() %>% dplyr::select(-geometry) %>%
@@ -168,8 +168,8 @@ task1_3 <- d.counties %>%
 ```{r}
 glimpse(task1_3)
 ```
-##task1-4
-#calculate characters
+####Task1-4
+#####calculate characters
 ```{r}
 name_length <- d.stations %>%
   as_tibble() %>% dplyr::select(-geometry) %>%
@@ -180,24 +180,41 @@ name_length <- d.stations %>%
 glimpse(name_length)
 ```
 
-#find shortest name
+#####find shortest name
 ```{r}
 task1_4 <- name_length %>%
   slice_min(name_length, n = 1) %>%
   select(STATION_NA, tot_char)
 ```
-#answer for 1-4
+####answer for 1-4
 ```{r}
 glimpse(task1_4)
 ```
 
-####TASK 2
-##Task2-1
-#scatterplot
+#TASK 2
+####Task2-1
+#####scatterplot
 ```{r}
 ggplot(d.counties) +
   aes(x = ALAND10, y = AWATER10, color = STATEFP10) + geom_point(size = 1) +
   labs(title = "Relationship Bewteen Land and Water Area for Counties", x = "Land Area (ALAND10)", y = "Water Area (AWATER10)")
+```
+####Task2-2
+#####histogram
+```{r}
+ggplot(d.stations) +
+  aes(x = Drainage_A) +
+  geom_histogram(bins = 15) +
+  labs(title = "Drainage Area for All Monitoring Stations", x = "Drainage Area (Drainage_A)", y = "Number of Stations")
+```
+
+####Task2-3
+#####histogram with color
+```{r}
+ggplot(d.stations) +
+  aes(x = Drainage_A) +
+  geom_histogram(bins = 15) +
+  labs(title = "Drainage Area for All Monitoring Stations", x = "Drainage Area (Drainage_A)", y = "Number of Stations")
 ```
 
 
