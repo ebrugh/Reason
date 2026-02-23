@@ -40,7 +40,7 @@ d.counties %>% sf::st_is_valid()
 d.counties <- d.counties %>% sf::st_make_valid()
 ```
 
-#dplyr
+
 ```{r}
 d.counties %>% dplyr::select(GEOID10, ALAND10) %>% head()
 ```
@@ -122,8 +122,8 @@ del.counties %>% st_area()
 
 
 
-####Task 1
-##task1_1
+####TASK 1
+##task1-1
 ```{r}
 task1_1 <- d.counties %>% 
   as_tibble() %>% dplyr::select(-geometry) %>%
@@ -189,6 +189,15 @@ task1_4 <- name_length %>%
 #answer for 1-4
 ```{r}
 glimpse(task1_4)
+```
+
+####TASK 2
+##Task2-1
+#scatterplot
+```{r}
+ggplot(d.counties) +
+  aes(x = ALAND10, y = AWATER10, color = STATEFP10) + geom_point(size = 1) +
+  labs(title = "Relationship Bewteen Land and Water Area for Counties", x = "Land Area (ALAND10)", y = "Water Area (AWATER10)")
 ```
 
 
