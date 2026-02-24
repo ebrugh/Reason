@@ -63,9 +63,11 @@ del.counties %>% st_area()
 
 
 #Task 1 
-d.counties %>% {
-  group_by(STATEFP10) %>%
-    mutate(stateWaterArea = sum(WATER10))}
+task1_1 <- d.counties %>% {
+  as_tibble(d.counties) %>% dplyr::select(-geometry) %>%
+    group_by(STATEFP10) %>%
+    summarise(stateWaterArea = sum(AWATER10)) 
+}
 
 
 
